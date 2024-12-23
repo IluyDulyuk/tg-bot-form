@@ -1,20 +1,13 @@
-import styles from './FormSection.module.css';
-
-import { ColorInput, IconContainer, Input, Section, Slider } from '@telegram-apps/telegram-ui';
-import { Icon24SunLow } from '@telegram-apps/telegram-ui/dist/icons/24/sun_low';
+import { Button, Input, Section, Textarea} from '@telegram-apps/telegram-ui';
 
 export const FormSection = () => (
-  <Section header="Form section">
-    <Input header="Android title" placeholder="Something here" />
-    <ColorInput />
-    <Slider
-      step={25}
-      before={(
-        <IconContainer className={styles.sliderIcon}>
-          <Icon24SunLow />
-        </IconContainer>
-      )}
-      after={<IconContainer><Icon24SunLow /></IconContainer>}
-    />
+  <Section header="Заполните форму ниже">
+    <Input header="Груз" placeholder="Тип груза" /> 
+    <Input header="Вес" placeholder="Общий вес посылки в кг" /> 
+    <Input header="Цена за кг" placeholder="Стоимость доставки за килограмм" /> 
+    <Input header="Откуда" placeholder="Город отправления" /> 
+    <Input header="Куда" placeholder="Город назначения" />
+    <Textarea header="Комментарий" placeholder="Дополнительные детали" />
+    <Button size="l" stretched>Добавить</Button>
   </Section>
 );
