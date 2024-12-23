@@ -8,6 +8,7 @@ export const FormSection = () => {
   const [price, setPrice] = useState('');
   const [from, setFrom] = useState('Москва');
   const [to, setTo] = useState('Санкт-Петербург');
+  const [loading, setLoading] = useState(false);
 
   const onWeightFocus = () => {
     const value = weight.split(' ')[0];
@@ -48,13 +49,22 @@ export const FormSection = () => {
   }
 
   const onButton = async () => {
+    setLoading(true);
+
     await fetch('https://98d5w9-3000.csb.app/api/sendMessage', {
       method: "POST",
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
       body: JSON.stringify(data)
     })
       .then((res) => {
         console.log(res)
       })
+      .finally(() => {
+        setLoading(false);
+      })
+
   }
 
   return (
@@ -85,6 +95,7 @@ export const FormSection = () => {
           stretched
           disabled={type === '' || weight === '' || price === '' || from === '' || to === ''}
           onClick={onButton}
+          loading={loading}
         >Добавить</Button>
       </div>
     </>
