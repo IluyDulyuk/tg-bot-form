@@ -3,13 +3,6 @@ import { useEffect, useState } from 'react';
 
 export const FormSection = () => {
 
-  let tg = window.Telegram.WebApp;
-  let chatId;
-
-  useEffect(() => {
-    chatId = tg.initDataUnsafe.user.id
-}, []);
-
   const [type, setType] = useState('');
   const [weight, setWeight] = useState('');
   const [price, setPrice] = useState('');
@@ -47,7 +40,7 @@ export const FormSection = () => {
 
     const data = {
         user: {
-            chatId: chatId
+            chatId: "798567487"
         },
         data: {
             type: type,
