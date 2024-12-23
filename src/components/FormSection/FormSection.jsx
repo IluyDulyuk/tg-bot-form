@@ -42,7 +42,7 @@ export const FormSection = () => {
 
   const onPriceBlur = () => {
     if(price !== '') {
-      const value = `${price} $`;
+      const value = `${price}$`;
       setPrice(value);
     } 
   }
