@@ -6,6 +6,8 @@ export const FormSection = () => {
   const [type, setType] = useState('');
   const [weight, setWeight] = useState('');
   const [price, setPrice] = useState('');
+  const [from, setFrom] = useState('Москва');
+  const [to, setTo] = useState('Санкт-Петербург');
 
   const onWeightFocus = () => {
     const value = weight.split(' ')[0];
@@ -31,23 +33,30 @@ export const FormSection = () => {
     } 
   }
 
+
+  const numbers = [];
+  for (let i = 1; i <= 1000; ++i) {
+    numbers.push(i)
+  }
+
   return (
     <>
       <Section header="Общая информация">
-        <Input status='error' header="Груз" placeholder="Тип груза" value={type} onChange={(e) => setType(e.target.value)} />
+        <Input header="Груз" placeholder="Тип груза" value={type} onChange={(e) => setType(e.target.value)} />
         <Input header="Вес" placeholder="Общий вес посылки в кг" value={weight} onChange={(e) => setWeight(e.target.value.replace(/[^\d.]/g, '').replace(/(\..*?)\./g, '$1'))} onFocus={onWeightFocus} onBlur={onWeightBlur} />
         <Input header="Цена за кг" placeholder="Стоимость доставки за кг" value={price} onChange={(e) => setPrice(e.target.value.replace(/[^\d.]/g, '').replace(/(\..*?)\./g, '$1'))} onFocus={onPriceFocus} onBlur={onPriceBlur} />
       </Section>
       <Section header="Откуда">
-        <Select>
-          <option>Москва</option>
-          <option>Красноярск</option>
+        <Select value={from} onChange={(e) => setFrom(e.target.value)}>
+          {numbers.map(n => (
+            <option key={n}>{n}</option>
+          ))}
         </Select>
       </Section>
       <Section header="Куда">
-        <Select>
+        <Select value={to} onChange={(e) => setTo(e.target.value)} >
           <option>Москва</option>
-          <option>Красноярск</option>
+          <option>Санкт-Петербург</option>
         </Select>
       </Section>
       <Section header="Дополнительно">
@@ -57,6 +66,7 @@ export const FormSection = () => {
       <Button
           size='l'
           stretched
+          disabled={type === '' || weight === '' || price === '' || from === '' || to === ''}
         >Добавить</Button>
       </div>
     </>
