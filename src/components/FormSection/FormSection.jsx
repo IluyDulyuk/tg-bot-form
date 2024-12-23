@@ -50,7 +50,7 @@ export const FormSection = () => {
   const onButton = async () => {
     await fetch('https://98d5w9-3000.csb.app/api/sendMessage', {
       method: "POST",
-      body: data
+      body: JSON.stringify(data)
     })
       .then((res) => {
         console.log(res)
