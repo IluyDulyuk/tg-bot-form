@@ -11,7 +11,7 @@ export const FormSection = () => {
 
   const onWeightFocus = () => {
     const value = weight.split(' ')[0];
-    setWeight(value)
+    setWeight(value); 
   }
 
   const onWeightBlur = () => {
@@ -33,10 +33,28 @@ export const FormSection = () => {
     } 
   }
 
+  const data = {
+      user: {
+          chatId: "798567487"
+      },
+      data: {
+          type: "Телефон",
+          weight: "1 кг",
+          price: "100$",
+          from: "Москва",
+          to: "Санкт-Петербург",
+          comment: "Срочно!"
+      }
+  }
 
-  const numbers = [];
-  for (let i = 1; i <= 1000; ++i) {
-    numbers.push(i)
+  const onButton = async () => {
+    await fetch('https://98d5w9-3000.csb.app/api/sendMessage', {
+      method: "POST",
+      body: data
+    })
+      .then((res) => {
+        console.log(res)
+      })
   }
 
   return (
@@ -48,9 +66,8 @@ export const FormSection = () => {
       </Section>
       <Section header="Откуда">
         <Select value={from} onChange={(e) => setFrom(e.target.value)}>
-          {numbers.map(n => (
-            <option key={n}>{n}</option>
-          ))}
+          <option>Москва</option>
+          <option>Санкт-Петербург</option>
         </Select>
       </Section>
       <Section header="Куда">
@@ -67,6 +84,7 @@ export const FormSection = () => {
           size='l'
           stretched
           disabled={type === '' || weight === '' || price === '' || from === '' || to === ''}
+          onClick={onButton}
         >Добавить</Button>
       </div>
     </>
