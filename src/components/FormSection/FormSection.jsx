@@ -3,16 +3,11 @@ import { useEffect, useState } from 'react';
 
 export const FormSection = () => {
 
+  let tg = window.Telegram.WebApp;
   let chatId;
 
   useEffect(() => {
-    window.Telegram.WebApp.ready();
-  }, []);
-
-  useEffect(() => {
-    const initData = window.Telegram.WebApp.initData;
-    const searchParams = new URLSearchParams(initData);
-    chatId = searchParams.get('chat_id');
+    chatId = tg.initDataUnsafe.user.id
 }, []);
 
   const [type, setType] = useState('');
