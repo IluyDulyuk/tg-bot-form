@@ -1,5 +1,5 @@
 import { Button, Input, Section, Select, Textarea } from '@telegram-apps/telegram-ui';
-import { useEffect, useState } from 'react';
+import {  useState } from 'react';
 
 export const FormSection = () => {
 
