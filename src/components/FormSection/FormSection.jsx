@@ -1,12 +1,25 @@
 import { Button, Input, Section, Select, Textarea } from '@telegram-apps/telegram-ui';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export const FormSection = () => {
+
+  let chatId;
+
+  useEffect(() => {
+    window.Telegram.WebApp.ready();
+  }, []);
+
+  useEffect(() => {
+    const initData = window.Telegram.WebApp.initData;
+    const searchParams = new URLSearchParams(initData);
+    chatId = searchParams.get('chat_id');
+}, []);
 
   const [type, setType] = useState('');
   const [weight, setWeight] = useState('');
   const [price, setPrice] = useState('');
   const [from, setFrom] = useState('Москва');
+  const [comment, setComment] = useState('');
   const [to, setTo] = useState('Санкт-Петербург');
   const [loading, setLoading] = useState(false);
 
@@ -34,22 +47,22 @@ export const FormSection = () => {
     } 
   }
 
-  const data = {
-      user: {
-          chatId: "798567487"
-      },
-      data: {
-          type: "Телефон",
-          weight: "1 кг",
-          price: "100$",
-          from: "Москва",
-          to: "Санкт-Петербург",
-          comment: "Срочно!"
-      }
-  }
-
   const onButton = async () => {
     setLoading(true);
+
+    const data = {
+        user: {
+            chatId: chatId
+        },
+        data: {
+            type: type,
+            weight: weight,
+            price: price,
+            from: from,
+            to: to,
+            comment: comment
+        }
+    }
 
     await fetch('https://98d5w9-3000.csb.app/api/sendMessage', {
       method: "POST",
@@ -87,7 +100,7 @@ export const FormSection = () => {
         </Select>
       </Section>
       <Section header="Дополнительно">
-        <Textarea header="Комментарий" placeholder="Дополнительные детали" />
+        <Textarea value={comment} onChange={(e) => setComment(e.target.value)} header="Комментарий" placeholder="Дополнительные детали" />
       </Section>
       <div style={{padding: '20px'}}>
       <Button
