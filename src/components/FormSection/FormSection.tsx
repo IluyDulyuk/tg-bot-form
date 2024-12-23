@@ -6,11 +6,23 @@ export const FormSection = () => {
   const [type, setType] = useState('');
   const [weight, setWeight] = useState('');
 
+  const onWeightFocus = () => {
+    const value = weight.split(' ')[0];
+    setWeight(value)
+  }
+
+  const onWightBlur = () => {
+    if(weight !== '') {
+      const value = `${weight} кг.`;
+      setWeight(value);
+    } 
+  }
+
   return (
     <>
       <Section header="Общая информация">
         <Input header="Груз" placeholder="Тип груза" value={type} onChange={(e) => setType(e.target.value)} />
-        <Input header="Вес" placeholder="Общий вес посылки в кг" value={weight} onChange={(e) => setWeight(e.target.value)} />
+        <Input header="Вес" placeholder="Общий вес посылки в кг" value={weight} onChange={(e) => setWeight(e.target.value.replace(/[^\d.]/g, '').replace(/(\..*?)\./g, '$1'))} onFocus={onWeightFocus} onBlur={onWightBlur} />
         <Input header="Цена за кг" placeholder="Стоимость доставки за килограмм" />
       </Section>
       <Section header="Откуда">
