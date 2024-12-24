@@ -72,6 +72,7 @@ export const FormSection = () => {
     })
       .finally(() => {
         setLoading(false);
+        WebApp.close();
       })
 
   }
