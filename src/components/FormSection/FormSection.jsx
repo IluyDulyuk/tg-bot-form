@@ -44,16 +44,20 @@ export const FormSection = () => {
     } 
   }
 
+  const onButton = () => {
+    const data = {
+      name: 'Илья'
+    }
+
+    WebApp.sendData(JSON.stringify(data));
+  }
+
   return (
     <>
       {
         userData ?
         (
           <>
-            <ul>
-              <li>ID: {userData.id}</li>
-              <li>Name: {userData.first_name}</li>
-            </ul>
             <Section header="Общая информация">
               <Input header="Груз" placeholder="Тип груза" value={type} onChange={(e) => setType(e.target.value)} />
               <Input header="Вес" placeholder="Общий вес посылки в кг" value={weight} onChange={(e) => setWeight(e.target.value.replace(/[^\d.]/g, '').replace(/(\..*?)\./g, '$1'))} onFocus={onWeightFocus} onBlur={onWeightBlur} />
@@ -79,6 +83,7 @@ export const FormSection = () => {
                 size='l'
                 stretched
                 disabled={type === '' || weight === '' || price === '' || from === '' || to === ''}
+                onClick={onButton}
               >Создать объявление</Button>
             </div>
           </>
