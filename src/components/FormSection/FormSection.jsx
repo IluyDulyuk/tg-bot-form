@@ -16,9 +16,9 @@ export const FormSection = () => {
   const [type, setType] = useState('');
   const [weight, setWeight] = useState('');
   const [price, setPrice] = useState('');
-  const [from, setFrom] = useState('Москва');
+  const [from, setFrom] = useState('');
   const [comment, setComment] = useState('');
-  const [to, setTo] = useState('Санкт-Петербург');
+  const [to, setTo] = useState('');
   const [loading, setLoading] = useState(false);
 
   const onWeightFocus = () => {
