@@ -63,7 +63,7 @@ export const FormSection = () => {
       }
     }
 
-    await fetch('https://tg-bot-form.vercel.app/', {
+    await fetch('https://tg-bot-form.vercel.app/sendMessage', {
       method: "POST",
       headers: {
         'Content-type': 'application/json',
