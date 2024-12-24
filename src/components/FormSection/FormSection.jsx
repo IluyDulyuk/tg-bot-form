@@ -19,6 +19,7 @@ export const FormSection = () => {
   const [from, setFrom] = useState('Москва');
   const [comment, setComment] = useState('');
   const [to, setTo] = useState('Санкт-Петербург');
+  const [loading, setLoading] = useState(false);
 
   const onWeightFocus = () => {
     const value = weight.split(' ')[0];
@@ -44,12 +45,35 @@ export const FormSection = () => {
     } 
   }
 
-  const onButton = () => {
+  const onButton = async () => {
+    
+    setLoading(true)
+
     const data = {
-      name: 'Илья'
+      user: {
+        chatId: userData.id
+      },
+      data: {
+        type,
+        weight,
+        price,
+        from,
+        to,
+        comment
+      }
     }
 
-    WebApp.sendData(JSON.stringify(data));
+    await fetch('https://tg-bot-form.vercel.app/', {
+      method: "POST",
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify(data)
+    })
+      .finally(() => {
+        setLoading(false);
+      })
+
   }
 
   return (
@@ -84,6 +108,7 @@ export const FormSection = () => {
                 stretched
                 disabled={type === '' || weight === '' || price === '' || from === '' || to === ''}
                 onClick={onButton}
+                loading={loading}
               >Создать объявление</Button>
             </div>
           </>
