@@ -62,8 +62,8 @@ export const FormSection = () => {
         type,
         weight,
         price,
-        from,
-        to,
+        from: noFrom ? from : fromSelect,
+        to: noTo ? to : toSelect,
         comment
       }
     }
