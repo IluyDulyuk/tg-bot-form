@@ -9,7 +9,7 @@ export const FormSection = () => {
   const [from, setFrom] = useState('Москва');
   const [comment, setComment] = useState('');
   const [to, setTo] = useState('Санкт-Петербург');
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
 
   const onWeightFocus = () => {
     const value = weight.split(' ')[0];
@@ -35,37 +35,13 @@ export const FormSection = () => {
     } 
   }
 
-  const onButton = async () => {
-    setLoading(true);
+  const onButton = () => {
 
     const data = {
-        user: {
-            chatId: "798567487"
-        },
-        data: {
-            type: type,
-            weight: weight,
-            price: price,
-            from: from,
-            to: to,
-            comment: comment
-        }
+      name: 'Илья'
     }
 
-    await fetch('https://98d5w9-3000.csb.app/api/sendMessage', {
-      method: "POST",
-      headers: {
-        'Content-type': 'application/json; charset=UTF-8',
-      },
-      body: JSON.stringify(data)
-    })
-      .then((res) => {
-        console.log(res)
-      })
-      .finally(() => {
-        setLoading(false);
-      })
-
+    window.Telegram.WebApp.sendData(JSON.stringify(data));
   }
 
   return (
@@ -96,8 +72,8 @@ export const FormSection = () => {
           stretched
           disabled={type === '' || weight === '' || price === '' || from === '' || to === ''}
           onClick={onButton}
-          loading={loading}
-        >Добавить</Button>
+          // loading={loading}
+        >Создать объявление</Button>
       </div>
     </>
   )
