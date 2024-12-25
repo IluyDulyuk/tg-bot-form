@@ -38,7 +38,7 @@ export const FormSection = () => {
   }
 
   const onPriceFocus = () => {
-    const value = price.split(' ')[0];
+    const value = price.slice(0, price.indexOf('$'));
     setPrice(value)
   }
 
